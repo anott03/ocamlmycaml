@@ -1,6 +1,6 @@
 (lang dune 3.7)
 
-(name helloworld)
+(name ocamlmycaml)
 
 (generate_opam_files true)
 

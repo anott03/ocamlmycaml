@@ -1,3 +1,5 @@
+(* the compiler won't compile this if there are unused functions or variables *)
+
 (* let rec range a b = *)
 (*     if a > b then [] *)
 (*     else a :: range (a+1) b *)
@@ -12,26 +14,36 @@
 (*     | Some x -> x;; *)
 
 
-type running_sum = {
-    mutable sum: float;
-    mutable sum_sq: float;
-    mutable samples: int;
-};;
-let create () = { sum = 0.; sum_sq = 0.; samples = 0 };;
-let update rsum x =
-    rsum.samples <- rsum.samples + 1;
-    rsum .sum    <- rsum.sum +. x;
-    rsum.sum_sq  <- rsum.sum_sq +. x *. x;;
+(* type running_sum = { *)
+(*     mutable sum: float; *)
+(*     mutable sum_sq: float; *)
+(*     mutable samples: int; *)
+(* };; *)
+(* let create () = { sum = 0.; sum_sq = 0.; samples = 0 };; *)
+(* let update rsum x = *)
+(*     rsum.samples <- rsum.samples + 1; *)
+(*     rsum .sum    <- rsum.sum +. x; *)
+(*     rsum.sum_sq  <- rsum.sum_sq +. x *. x;; *)
+(**)
+(* let rs = create();; *)
+(* update rs 2.;; *)
+(**)
+(* let print_rsum rs = *)
+(*     print_float rs.sum; *)
+(*     print_float rs.sum_sq; *)
+(*     print_int rs.samples;; *)
 
-let rs = create();;
-update rs 2.;;
+let x = { contents = 0 };;
+let y = ref x;;
 
-let print_rsum rs =
-    print_float rs.sum;
-    print_float rs.sum_sq;
-    print_int rs.samples;;
+(* there is a way to do this with refs *)
+let rec sum list =
+    if list = [] then 0
+    else List.hd list + sum(List.tl list);;
 
 let () =
     (* print_list (range 0 10);; *)
     (* print_string "\n";; *)
-    print_rsum rs;;
+    (* print_rsum rs;; *)
+    print_int(sum [1; 2; 3]);;
+    print_char '\n';;
