@@ -1,5 +1,7 @@
 (* the compiler won't compile this if there are unused functions or variables *)
 
+open Core;;
+
 (* let rec range a b = *)
 (*     if a > b then [] *)
 (*     else a :: range (a+1) b *)
@@ -33,17 +35,16 @@
 (*     print_float rs.sum_sq; *)
 (*     print_int rs.samples;; *)
 
-let x = { contents = 0 };;
-let y = ref x;;
+(* let x = { contents = 0 };; *)
+(* let y = ref x;; *)
 
-(* there is a way to do this with refs *)
-let rec sum list =
-    if list = [] then 0
-    else List.hd list + sum(List.tl list);;
+let sum list =
+    let sum = ref 0 in
+    List.iter list ~f:(fun x -> sum := !sum + x);
+    !sum;;
 
 let () =
     (* print_list (range 0 10);; *)
     (* print_string "\n";; *)
     (* print_rsum rs;; *)
-    print_int(sum [1; 2; 3]);;
-    print_char '\n';;
+    printf "%d\n" (sum [1; 2; 3;]);;

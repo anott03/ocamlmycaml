@@ -1,4 +1,4 @@
 (executable
- (public_name helloworld)
+ (public_name ocamlmycaml)
  (name main)
- (libraries helloworld))
+ (libraries ocamlmycaml base core))
